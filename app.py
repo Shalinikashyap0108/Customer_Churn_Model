@@ -4,9 +4,16 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Load Model
-with open("model.pkl", "rb") as f:
+import os
+import pickle
+
+# Get absolute path to model.pkl regardless of where the script is run
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
+
+# Load both model and scaler
+with open(MODEL_PATH, "rb") as f:
     model, scaler = pickle.load(f)
+
 
 @app.route('/')
 def home():
