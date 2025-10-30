@@ -18,19 +18,19 @@ warnings.filterwarnings("ignore")
 
 # connect to MYSQL database
 
-conn = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    password = "12345",
-    database= "churn_db"
-)
+# conn = mysql.connector.connect(
+    # host = "localhost",
+    # user = "root",
+    # password = "12345",
+    # database= "churn_db"
+# )
 
 
 # In[22]:
 
 
-query = "SELECT * FROM customers;"
-df = pd.read_sql(query, conn)
+# query = "SELECT * FROM customers;"
+df = pd.read_csv("Customers.csv")
 df.info()
 
 
@@ -128,6 +128,7 @@ print("Model is saved")
 
 
 # In[ ]:
+
 
 
 
