@@ -30,7 +30,9 @@ warnings.filterwarnings("ignore")
 
 
 # query = "SELECT * FROM customers;"
-df = pd.read_csv("Customers.csv")
+import os
+file_path = os.path.join(os.path.dirname(__file__), "Customers.csv")
+df = pd.read_csv(file_path)
 df.info()
 
 
@@ -128,6 +130,7 @@ print("Model is saved")
 
 
 # In[ ]:
+
 
 
 
