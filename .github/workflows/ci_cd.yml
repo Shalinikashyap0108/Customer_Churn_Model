@@ -2,43 +2,32 @@ name: MLOps CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build-train-test-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Pull Code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: 3.9
 
-      # 3️⃣ Install Dependencies
       - name: Install dependencies
+        working-directory: ./  # 👈 this tells GitHub to use your repo folder
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
 
-      # 4️⃣ Run Model Training
-      - name: Run churn_analysis.py
-        run: |
-          python churn_analysis.py
+      - name: Run churn analysis
+        working-directory: ./  # 👈 make sure this points to where churn_analysis.py lives
+        run: python churn_analysis.py
 
-      # 5️⃣ Run Tests
       - name: Run tests
-        run: |
-          pytest tests/ --maxfail=1 --disable-warnings -q
-
-      # 6️⃣ Deploy Flask App (optional simulation)
-      - name: Simulate Deployment
-        run: |
-          echo "Model retrained and Flask app ready for deployment!"
+        working-directory: ./tests  # 👈 if your tests are inside the tests folder
+        run: pytest --maxfail=1 --disable-warnings -q
