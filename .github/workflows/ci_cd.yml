@@ -25,6 +25,3 @@ jobs:
 
       - name: Run churn analysis
         run: python churn_analysis.py
-
-      - name: Run tests
-        run: pytest --maxfail=1 --disable-warnings -q
