@@ -92,7 +92,7 @@ X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.30,
 # In[33]:
 
 
-from sklearn.linear_model import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 model = DecisionTreeClassifier()
 model.fit(X_train, y_train)
@@ -130,6 +130,7 @@ print("Model is saved")
 
 
 # In[ ]:
+
 
 
 
