@@ -1,33 +1,37 @@
 name: MLOps CI/CD Pipeline
 
+
 on:
-  push:
-    branches:
-      - main
+push:
+branches:
+- main
+
 
 jobs:
-  build-train-test-deploy:
-    runs-on: ubuntu-latest
+build-train-test-deploy:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
+steps:
+- name: Checkout repository
+uses: actions/checkout@v3
 
-      - name: Install dependencies
-        working-directory: ./  # 👈 this tells GitHub to use your repo folder
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
 
-      - name: Run churn analysis
-        working-directory: ./  # 👈 make sure this points to where churn_analysis.py lives
-        run: python churn_analysis.py
+- name: Set up Python
+uses: actions/setup-python@v4
+with:
+python-version: 3.9
 
-      - name: Run tests
-        working-directory: ./tests  # 👈 if your tests are inside the tests folder
-        run: pytest --maxfail=1 --disable-warnings -q
+
+- name: Install dependencies
+run: |
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+
+- name: Run churn analysis
+run: python churn_analysis.py
+
+
+- name: Run tests
+run: pytest --maxfail=1 --disable-warnings -q
